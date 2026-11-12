@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Unconfirmed commercial details and destinations (sign-up URL, demo URL, CTA label, annual price status) live only in `src/lib/site-config.ts`; components read from it and render "pending" states instead of hard-coding guesses, so confirming a value is a one-line change.
+- The landing page is one long scrolling page at `/` with in-page anchors (explicitly requested by the brief); sections live in `src/components/trada/`, one file per section.
+- Scroll-reveal hides content only under `html.js` (set by an inline head script) and is disabled for reduced motion, so content is never lost without JS.

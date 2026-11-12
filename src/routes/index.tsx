@@ -1,23 +1,60 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Categories } from "@/components/trada/Categories";
+import { Challenges } from "@/components/trada/Challenges";
+import { Demos } from "@/components/trada/Demos";
+import { Faqs } from "@/components/trada/Faqs";
+import { FinalCta } from "@/components/trada/FinalCta";
+import { Footer } from "@/components/trada/Footer";
+import { Header, PreviewNotice } from "@/components/trada/Header";
+import { Hero } from "@/components/trada/Hero";
+import { HowItWorks } from "@/components/trada/HowItWorks";
+import { Pricing } from "@/components/trada/Pricing";
+import { Value } from "@/components/trada/Value";
 
-// The home route ships no og:image, so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Trada — Run Your Business Smarter | Sales, Stock & Profit" },
+      {
+        name: "description",
+        content:
+          "Trada helps Nigerian business owners record sales, manage stock and know their profit. Just speak, snap or type.",
+      },
+      { property: "og:title", content: "Trada — Run Your Business Smarter" },
+      {
+        property: "og:description",
+        content: "Record sales, manage stock and know your profit effortlessly. Just speak, snap or type.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-full focus:bg-primary focus:px-5 focus:py-3 focus:text-primary-foreground"
+      >
+        Skip to content
+      </a>
+      <PreviewNotice />
+      <Header />
+      <main id="main">
+        <Hero />
+        <Challenges />
+        <Value />
+        <Demos />
+        <Categories />
+        <HowItWorks />
+        <Pricing />
+        <Faqs />
+        <FinalCta />
+      </main>
+      <Footer />
+    </>
   );
 }
