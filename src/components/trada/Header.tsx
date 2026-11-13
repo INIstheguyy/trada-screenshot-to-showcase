@@ -28,89 +28,83 @@ export function Header() {
   }, []);
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-40 transition-[background-color,box-shadow,border-color] duration-300",
-        scrolled
-          ? "border-b border-border/70 bg-background/90 backdrop-blur-md"
-          : "border-b border-transparent bg-background",
-      )}
-    >
-      <div className="container-page flex h-20 items-center justify-between gap-6">
-        <a href="#home" aria-label="Trada home" className="rounded-md">
-          <Logo />
-        </a>
-
-        <nav aria-label="Main" className="hidden lg:block">
-          <ul className="flex items-center gap-1">
-            {navLinks.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  className="rounded-full px-4 py-2 text-[0.95rem] font-medium text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  {l.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="hidden items-center gap-3 lg:flex">
-          {siteConfig.demoUrl && (
-            <Button asChild variant="quiet" size="lg">
-              <a href={siteConfig.demoUrl}>Watch 2-Min Demo</a>
-            </Button>
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
+      <div className="container-page pt-3 sm:pt-5">
+        <div
+          className={cn(
+            "pointer-events-auto flex h-16 items-center justify-between gap-4 rounded-full border border-border/75 bg-background/92 px-4 backdrop-blur-xl transition-shadow duration-300 sm:h-[4.5rem] sm:px-6 lg:px-7",
+            scrolled ? "shadow-soft" : "shadow-[0_8px_30px_-22px_rgba(15,31,61,0.35)]",
           )}
-          <CtaButton size="lg" />
-        </div>
+        >
+          <a href="#home" aria-label="Trada home" className="shrink-0 rounded-md">
+            <Logo />
+          </a>
 
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger asChild>
-            <Button variant="quiet" size="touch" className="lg:hidden" aria-label="Open menu">
-              <Menu className="size-5" aria-hidden />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className="flex w-full max-w-sm flex-col bg-background p-0">
-            <div className="flex h-20 items-center border-b border-border px-6">
-              <SheetTitle asChild>
-                <span>
-                  <Logo />
-                </span>
-              </SheetTitle>
-            </div>
-            <nav aria-label="Mobile" className="flex-1 px-3 py-6">
-              <ul className="space-y-1">
-                {navLinks.map((l) => (
-                  <li key={l.href}>
-                    <a
-                      href={l.href}
-                      onClick={() => setOpen(false)}
-                      className="flex min-h-12 items-center rounded-xl px-4 font-display text-xl font-medium text-foreground transition-colors hover:bg-accent"
-                    >
-                      {l.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-            <div className="border-t border-border p-6">
-              <CtaButton className="w-full" />
-            </div>
-          </SheetContent>
-        </Sheet>
+          <nav aria-label="Main" className="hidden lg:block">
+            <ul className="flex items-center gap-0.5">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="rounded-full px-3.5 py-2 text-[0.9rem] font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="hidden items-center gap-2 lg:flex">
+            {siteConfig.demoUrl && (
+              <Button asChild variant="quiet" size="lg">
+                <a href={siteConfig.demoUrl}>Watch 2-Min Demo</a>
+              </Button>
+            )}
+            <CtaButton size="lg" />
+          </div>
+
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <Button
+                variant="quiet"
+                size="touch"
+                className="shrink-0 rounded-full border border-border bg-surface lg:hidden"
+                aria-label="Open menu"
+              >
+                <Menu className="size-5" aria-hidden />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="flex w-full max-w-sm flex-col bg-background p-0">
+              <div className="flex h-20 items-center border-b border-border px-6">
+                <SheetTitle asChild>
+                  <span>
+                    <Logo />
+                  </span>
+                </SheetTitle>
+              </div>
+              <nav aria-label="Mobile" className="flex-1 px-3 py-6">
+                <ul className="space-y-1">
+                  {navLinks.map((link) => (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        onClick={() => setOpen(false)}
+                        className="flex min-h-12 items-center rounded-xl px-4 font-display text-xl font-medium text-foreground transition-colors hover:bg-accent"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+              <div className="border-t border-border p-6">
+                <CtaButton className="w-full" />
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
-  );
-}
-
-export function PreviewNotice() {
-  return (
-    <div className="bg-navy-deep text-on-navy-muted">
-      <p className="container-page py-2.5 text-center text-xs leading-relaxed sm:text-sm">
-        <span className="font-semibold text-on-navy">Review build.</span> Product screens use illustrative
-        sample data. Items marked “Pending” are awaiting confirmation.
-      </p>
-    </div>
   );
 }

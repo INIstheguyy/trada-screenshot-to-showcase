@@ -5,7 +5,7 @@ import { Demos } from "@/components/trada/Demos";
 import { Faqs } from "@/components/trada/Faqs";
 import { FinalCta } from "@/components/trada/FinalCta";
 import { Footer } from "@/components/trada/Footer";
-import { Header, PreviewNotice } from "@/components/trada/Header";
+import { Header } from "@/components/trada/Header";
 import { Hero } from "@/components/trada/Hero";
 import { HowItWorks } from "@/components/trada/HowItWorks";
 import { Pricing } from "@/components/trada/Pricing";
@@ -23,7 +23,8 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Trada — Run Your Business Smarter" },
       {
         property: "og:description",
-        content: "Record sales, manage stock and know your profit effortlessly. Just speak, snap or type.",
+        content:
+          "Record sales, manage stock and know your profit effortlessly. Just speak, snap or type.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -41,7 +42,6 @@ function Index() {
       >
         Skip to content
       </a>
-      <PreviewNotice />
       <Header />
       <main id="main">
         <Hero />

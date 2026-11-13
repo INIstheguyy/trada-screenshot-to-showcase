@@ -5,7 +5,6 @@ import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 import { PhoneFrame } from "./PhoneFrame";
 import { Reveal } from "./Reveal";
-import { SampleTag } from "./Tags";
 
 export type DemoStep = { label: string; caption: string };
 
@@ -63,22 +62,26 @@ export function DemoStory({
   return (
     <div
       ref={ref}
-      className={cn(
-        "grid items-center gap-14 lg:grid-cols-2 lg:gap-24",
-        reverse && "lg:[&>*:first-child]:order-2",
-      )}
+      className="feature-story grid items-center gap-4 sm:gap-8 lg:grid-cols-2 lg:gap-16"
     >
-      <Reveal>
-        <div className="flex items-center gap-4">
-          <span className="grid size-12 place-items-center rounded-2xl bg-accent text-accent-foreground">
+      <Reveal className={cn("order-2", reverse ? "lg:order-2" : "lg:order-1")}>
+        <div className="flex items-center gap-3 sm:gap-4">
+          <span className="grid size-10 place-items-center rounded-xl bg-accent text-accent-foreground sm:size-12 sm:rounded-2xl">
             {icon}
           </span>
-          <span className="font-display text-lg font-medium text-muted-foreground">{number}</span>
+          <span className="font-display text-base font-medium text-muted-foreground sm:text-lg">
+            {number}
+          </span>
         </div>
-        <h3 className="mt-7 text-4xl font-semibold sm:text-5xl">{title}</h3>
-        <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted-foreground">{body}</p>
+        <h3 className="mt-3 text-2xl font-semibold sm:mt-5 sm:text-4xl lg:text-5xl">{title}</h3>
+        <p className="mt-2 line-clamp-2 max-w-lg text-sm leading-relaxed text-muted-foreground sm:mt-4 sm:text-base lg:text-lg">
+          {body}
+        </p>
 
-        <ol className="mt-10 max-w-lg space-y-3" aria-label={`${title} steps`}>
+        <ol
+          className="mt-4 grid max-w-lg grid-cols-3 gap-1.5 sm:mt-6 sm:grid-cols-1 sm:gap-2 lg:mt-8 lg:gap-3"
+          aria-label={`${title} steps`}
+        >
           {steps.map((s, i) => {
             const active = i === step;
             return (
@@ -88,7 +91,7 @@ export function DemoStory({
                   onClick={() => choose(i)}
                   aria-pressed={active}
                   className={cn(
-                    "relative flex w-full items-start gap-4 overflow-hidden rounded-2xl border px-5 py-4 text-left transition-colors duration-300",
+                    "relative flex h-full w-full flex-col items-center gap-1.5 overflow-hidden rounded-xl border px-1.5 py-2.5 text-center transition-colors duration-300 sm:flex-row sm:items-start sm:gap-3 sm:rounded-2xl sm:px-4 sm:py-3 sm:text-left lg:gap-4 lg:px-5 lg:py-4",
                     active
                       ? "border-secondary/40 bg-surface shadow-soft"
                       : "border-transparent hover:bg-surface/70",
@@ -96,7 +99,7 @@ export function DemoStory({
                 >
                   <span
                     className={cn(
-                      "mt-0.5 grid size-7 shrink-0 place-items-center rounded-full text-sm font-semibold transition-colors",
+                      "grid size-6 shrink-0 place-items-center rounded-full text-xs font-semibold transition-colors sm:mt-0.5 sm:size-7 sm:text-sm",
                       active || i < step
                         ? "bg-secondary text-secondary-foreground"
                         : "bg-muted text-muted-foreground",
@@ -105,8 +108,10 @@ export function DemoStory({
                     {i + 1}
                   </span>
                   <span>
-                    <span className="block font-semibold text-foreground">{s.label}</span>
-                    <span className="mt-1 block text-[0.95rem] leading-relaxed text-muted-foreground">
+                    <span className="block text-xs font-semibold leading-tight text-foreground sm:text-base">
+                      {s.label}
+                    </span>
+                    <span className="mt-1 hidden text-sm leading-relaxed text-muted-foreground lg:block lg:text-[0.95rem]">
                       {s.caption}
                     </span>
                   </span>
@@ -115,7 +120,10 @@ export function DemoStory({
                       key={`bar-${step}`}
                       aria-hidden="true"
                       className="fill-bar absolute inset-x-0 bottom-0 h-0.5 bg-secondary"
-                      style={{ animationDuration: `${STEP_MS[i] ?? 3200}ms`, animationTimingFunction: "linear" }}
+                      style={{
+                        animationDuration: `${STEP_MS[i] ?? 3200}ms`,
+                        animationTimingFunction: "linear",
+                      }}
                     />
                   )}
                 </button>
@@ -126,21 +134,25 @@ export function DemoStory({
         <button
           type="button"
           onClick={replay}
-          className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full px-4 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent"
+          className="mt-4 hidden min-h-11 items-center gap-2 rounded-full px-4 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent lg:inline-flex"
         >
           <RotateCcw className="size-4" aria-hidden /> Play again
         </button>
       </Reveal>
 
-      <Reveal delay={120} className="flex flex-col items-center gap-5">
-        <div className="w-[17.5rem] sm:w-[19.5rem]">
-          <PhoneFrame label={phoneLabel}>
-            <div key={step} className="screen-in h-full">
-              {renderScreen(step)}
-            </div>
-          </PhoneFrame>
+      <Reveal
+        delay={120}
+        className={cn("order-1 flex flex-col items-center", reverse ? "lg:order-1" : "lg:order-2")}
+      >
+        <div className="feature-phone-stage">
+          <div className="feature-phone-scale">
+            <PhoneFrame label={phoneLabel}>
+              <div key={step} className="screen-in h-full">
+                {renderScreen(step)}
+              </div>
+            </PhoneFrame>
+          </div>
         </div>
-        <SampleTag />
       </Reveal>
     </div>
   );
