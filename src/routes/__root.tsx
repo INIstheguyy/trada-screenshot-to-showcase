@@ -81,15 +81,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "theme-color", content: "#003554" },
       { title: "Trada — Manage, Sell, Grow" },
       {
         name: "description",
-        content: "AI-powered business management for Nigerian SMEs: sales, stock, expenses and profit.",
+        content:
+          "AI-powered business management for Nigerian SMEs: sales, stock, expenses and profit.",
       },
       { property: "og:title", content: "Trada — Manage, Sell, Grow" },
       {
         property: "og:description",
-        content: "AI-powered business management for Nigerian SMEs: sales, stock, expenses and profit.",
+        content:
+          "AI-powered business management for Nigerian SMEs: sales, stock, expenses and profit.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -99,7 +102,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "icon", href: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { rel: "icon", href: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" },
+      { rel: "manifest", href: "/site.webmanifest" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -119,7 +126,9 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en" suppressHydrationWarning>
       <head>
         {/* Marks JS as available so scroll-reveal styles only hide content when they can show it again. */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        <script
+          dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }}
+        />
         <HeadContent />
       </head>
       <body>

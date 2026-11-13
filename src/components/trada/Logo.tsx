@@ -1,28 +1,28 @@
 import { cn } from "@/lib/utils";
 
-/**
- * Temporary text wordmark. Replace with the approved Trada logo artwork once supplied —
- * the real symbol must not be redrawn or approximated.
- */
-export function Logo({ tone = "dark", className }: { tone?: "dark" | "light"; className?: string }) {
+export function Logo({
+  tone = "dark",
+  className,
+}: {
+  tone?: "dark" | "light";
+  className?: string;
+}) {
   return (
-    <span className={cn("inline-flex flex-col leading-none", className)}>
-      <span
-        className={cn(
-          "font-display text-2xl font-bold tracking-tight",
-          tone === "dark" ? "text-primary" : "text-on-navy",
-        )}
-      >
-        Trada
-      </span>
-      <span
-        className={cn(
-          "mt-1 text-[0.6875rem] font-medium tracking-wide",
-          tone === "dark" ? "text-accent-foreground" : "text-teal-bright",
-        )}
-      >
-        Manage, Sell, Grow.
-      </span>
-    </span>
+    <picture
+      className={cn(
+        "inline-flex shrink-0 items-center",
+        tone === "light" && "rounded-xl bg-white px-3 py-2",
+        className,
+      )}
+    >
+      <source srcSet="/brand/trada-logo.webp" type="image/webp" />
+      <img
+        src="/brand/trada-logo.png"
+        alt="Trada — Manage, Sell, Grow."
+        width={1018}
+        height={265}
+        className="h-8 w-auto object-contain sm:h-9"
+      />
+    </picture>
   );
 }
